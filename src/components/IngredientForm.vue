@@ -19,5 +19,7 @@ const ingredientsStore = useIngredientsStore()
     <button @click="ingredientsStore.updateIngredients" class="btn btn-outline">
       Get random ingredients
     </button>
+    <br />
+    <button class="btn mt-10" @click="$emit('triggerFetch')">Get Recipe</button>
   </div>
 </template>

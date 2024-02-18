@@ -40,17 +40,17 @@ export default {
 		if (!reply) return new Response('error');
 		const recipe: Recipe = JSON.parse(reply);
 		if (!recipe.success) return Response.json({ image: null, recipe });
-		const response = await openai.images.generate({
-			model: 'dall-e-3',
-			prompt: generateImagePrompt(recipe.title, recipe.description),
-			n: 1,
-			size: '1024x1024',
-		});
-		const url = response.data[0].url;
-		let result;
-		if (!url) result = { image: null, recipe };
-		else result = { image: url, recipe };
-
+		// const response = await openai.images.generate({
+		// 	model: 'dall-e-3',
+		// 	prompt: generateImagePrompt(recipe.title, recipe.description),
+		// 	n: 1,
+		// 	size: '1024x1024',
+		// });
+		// const url = response.data[0].url;
+		// let result;
+		// if (!url) result = { image: null, recipe };
+		// else result = { image: url, recipe };
+		const result = { image: null, recipe };
 		return new Response(JSON.stringify(result), {
 			headers: {
 				'Content-type': 'application/json',
