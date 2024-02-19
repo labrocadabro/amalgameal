@@ -11,9 +11,14 @@ const ingredientsStore = useIngredientsStore()
 const isFetching = ref(false)
 const recipe = ref<RecipeData | null>(null)
 const error = ref<Error | null>(null)
+const ingredientsError = ref(false)
 
 async function getRecipe() {
   try {
+    if (!ingredientsStore.ingredientString) {
+      ingredientsError.value = true
+      return
+    }
     isFetching.value = true
     const data = await fetch('https://recipe-worker.l-abrocadabro.workers.dev', {
       method: 'POST',
@@ -34,6 +39,10 @@ async function getRecipe() {
 function resetRecipe() {
   ingredientsStore.ingredientString = ''
   recipe.value = null
+  ingredientsError.value = false
+}
+function resetError() {
+  ingredientsError.value = false
 }
 </script>
 
@@ -62,7 +71,11 @@ function resetRecipe() {
         <RecipeCard :recipe="recipe.recipe" :image="recipe.image" @resetRecipe="resetRecipe" />
       </div>
       <div v-else>
-        <IngredientForm @triggerFetch="getRecipe" />
+        <IngredientForm
+          @triggerFetch="getRecipe"
+          :error="ingredientsError"
+          @resetError="resetError"
+        />
       </div>
     </div>
   </main>
