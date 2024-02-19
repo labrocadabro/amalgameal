@@ -10,7 +10,7 @@ const ingredientsStore = useIngredientsStore()
         type="text"
         name="ingredients"
         class="input input-bordered w-full max-w-xs mb-2"
-        v-model="ingredientsStore.ingredients"
+        v-model="ingredientsStore.ingredientString"
       />
       Choose your ingredients
     </label>

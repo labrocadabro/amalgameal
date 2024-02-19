@@ -316,5 +316,5 @@ export function randomIngredients() {
       randomIngredients.push(ingr)
     }
   }
-  return randomIngredients
+  return randomIngredients.join(', ')
 }

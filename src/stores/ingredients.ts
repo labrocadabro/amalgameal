@@ -1,12 +1,13 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { randomIngredients } from '@/utils/ingredients'
 
 export const useIngredientsStore = defineStore('ingredients', () => {
-  const ingredients = ref<string[]>([])
+  const ingredientString = ref('')
+  const ingredients = computed(() => ingredientString.value.split(',').map((s) => s.trim()))
   function updateIngredients() {
-    ingredients.value = randomIngredients()
+    ingredientString.value = randomIngredients()
   }
 
-  return { ingredients, updateIngredients }
+  return { ingredientString, ingredients, updateIngredients }
 })

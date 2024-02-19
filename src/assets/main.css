@@ -12,6 +12,12 @@
       @apply text-blue-500 hover:underline underline-offset-2;
     }
   }
+  h1 {
+    @apply text-5xl font-bold text-[#4ACACD];
+  }
+  h2 {
+    @apply text-2xl font-bold;
+  }
 }
 
 body {

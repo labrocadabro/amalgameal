@@ -24,20 +24,28 @@ async function getRecipe() {
     }).then((res) => res.json())
     recipe.value = data
   } catch (e) {
+    console.log(e)
     if (e instanceof Error) error.value = e
   } finally {
     isFetching.value = false
   }
 }
+
+function resetRecipe() {
+  ingredientsStore.ingredientString = ''
+  recipe.value = null
+}
 </script>
 
 <template>
-  <main class="flex flex-col min-h-screen justify-center items-center w-1/2 mx-auto">
+  <main class="flex flex-col min-h-screen justify-center items-center mx-auto">
     <div class="background"></div>
     <div class="gradient-overlay-1"></div>
     <div class="gradient-overlay-2"></div>
 
-    <div class="bg-white flex flex-col justify-center items-center p-10 rounded-lg z-10">
+    <div
+      class="bg-white flex flex-col justify-center items-center p-10 m-10 w-1/2 rounded-lg z-10 shadow-xl"
+    >
       <TitleCard />
       <div v-if="isFetching" class="flex justify-center mt-24">
         <!-- #4ACACD -->
@@ -51,7 +59,7 @@ async function getRecipe() {
           <IconWarning class="inline" /> WARNING: Prepare at your own risk!
           <IconWarning class="inline" />
         </p> -->
-        <RecipeCard :recipe="recipe.recipe" :image="recipe.image" />
+        <RecipeCard :recipe="recipe.recipe" :image="recipe.image" @resetRecipe="resetRecipe" />
       </div>
       <div v-else>
         <IngredientForm @triggerFetch="getRecipe" />
