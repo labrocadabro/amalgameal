@@ -307,13 +307,13 @@ const ingredients: string[] = [
 
 export function randomIngredients() {
   const randomIngredients: string[] = []
-  const numIngredients = Math.ceil(Math.random() * 5) + 3 // 4-8
+  const numIngredients = Math.ceil(Math.random() * 4) + 1 // 2-5
 
   while (randomIngredients.length < numIngredients) {
     const idx = Math.floor(Math.random() * ingredients.length)
-    const ingr = ingredients[idx]
-    if (!randomIngredients.includes(ingr)) {
-      randomIngredients.push(ingr)
+    const ingredient = ingredients[idx]
+    if (!randomIngredients.includes(ingredient)) {
+      randomIngredients.push(ingredient)
     }
   }
   return randomIngredients.join(', ')
